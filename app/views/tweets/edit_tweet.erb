@@ -1,0 +1,30 @@
+<!-- /tweets/edit_tweet -->
+
+<h1>Welcome, <%= Helpers.current_user(session).username %> to Fwitter</h1>
+
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
+<h3>Tweet <%= @tweet.id %></h3>
+
+<!-- Link to Edit Tweet -->
+<form action="/tweets/<%= @tweet.id %>" method="POST">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+
+  <h3><input type="text" name="content" id=content value="<%=@tweet.content %>"></h3>
+
+  <input type="submit" id="submit" value="Submit">
+</form>
+
+<br></br>
+
+<!-- Link to View All Tweets -->
+<form action="/tweets" method="GET">
+  <input type="submit" id="index" value="View All Tweets">
+</form>
+
+<!-- Link to Log Out -->
+<form action="/logout" method="GET">
+  <input type="submit" id="logout" value="Log Out">
+</form>

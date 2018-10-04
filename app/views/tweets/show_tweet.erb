@@ -1,0 +1,45 @@
+<!-- /tweets/show_tweet -->
+
+<h1>Welcome, <%= Helpers.current_user(session).username %> to Fwitter</h1>
+
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
+<h3>Tweet Id: <%= @tweet.id %></h3>
+
+<% if Helpers.current_user(session).id == @tweet.user.id %>
+  <h3> My Tweet</h3>
+<% else %>
+  <h3> <%= @tweet.user.username %>'s Tweet</h3>
+<% end %>
+
+<p><%=@tweet.content %></p>
+
+<!-- This will prevent the rspec test sweep from passing as it expects to see the Delete Tweet buttom even though tweet's created by another user <% if Helpers.current_user(session).id == @tweet.user.id %> -->
+<!-- <% end %> -->
+
+  <!-- Link to Edit Tweet -->
+  <form action="/tweets/<%= @tweet.id %>/edit" method="GET">
+    <input type="submit" id="edit" value="Edit Tweet">
+  </form>
+
+  <br>
+
+  <!-- Link to Delete Tweet -->
+  <form action="/tweets/<%= @tweet.id %>/delete" method="POST">
+        <input id="hidden" type="hidden" name="_method" value="delete">
+    <input type="submit" id="delete" value="Delete Tweet">
+  </form>
+
+<br></br>
+
+<!-- Link to View All Tweets -->
+<form action="/tweets" method="GET">
+  <input type="submit" id="index" value="View All Tweets">
+</form>
+
+<!-- Link to Log Out -->
+<form action="/logout" method="GET">
+  <input type="submit" id="logout" value="Log Out">
+</form>

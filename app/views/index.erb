@@ -1,0 +1,28 @@
+<h1>Welcome to Fwitter</h1>
+
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
+<% if Helpers.logged_in?(session) %>
+  <h3>You are log in as <%= Helpers.current_user(session).username %>. To continue, please select from the following options.</h3>
+
+  <form action="/tweets" method="GET">
+    <input type="submit" value="View Tweets">
+  </form>
+
+  <br>
+
+  <form action="/tweets/new" method="GET">
+    <input type="submit" value="New Tweet">
+  </form>
+
+  <br>
+
+  <form action="/logout" method="GET">
+    <input type="submit" value="Log out">
+  </form>
+  
+<% else %>
+  <h3>Please <a href="/signup">Sign Up</a> or <a href="/login">Log In</a> to continue.<h3>
+<% end %>

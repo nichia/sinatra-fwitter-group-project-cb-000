@@ -1,0 +1,27 @@
+<!-- /users/index -->
+
+<h1>Welcome to Fwitter</h1>
+
+<h3>Users</h3>
+
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
+<ul>
+  <% @users.each do |user| %>
+    <li><a href="/users/<%= user.slug %>"><%= user.username %></a></li>
+  <% end %>
+</ul>
+
+<br></br>
+
+<!-- Link to View all Users -->
+<form action="/users" method="get">
+  <input type="submit" id="submit" value="View All Users">
+</form>
+
+<!-- Link to Log Out -->
+<form action="/logout" method="GET">
+  <input type="submit" id="logout" value="Log Out">
+</form>

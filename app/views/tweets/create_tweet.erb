@@ -1,0 +1,26 @@
+<!-- /tweets/create_tweet -->
+
+<h1>Welcome, <%= Helpers.current_user(session).username %> to Fwitter</h1>
+
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
+<!-- Link to Create New Tweet -->
+<form action="/tweets" method="POST">
+  <p>Tweet: <input type=text name="content" id="tweet_content" required></p>
+
+  <input type="submit" id="submit" value="Submit">
+</form>
+
+<br></br>
+
+<!-- Return to Tweets -->
+<form acton="/tweets" method="GET">
+  <input type=submit id="index" value="View All Tweets">
+</form>
+
+<!-- Link to Log Out -->
+<form action="/logout" method="GET">
+  <input type="submit" id="logout" value="Log Out">
+</form>

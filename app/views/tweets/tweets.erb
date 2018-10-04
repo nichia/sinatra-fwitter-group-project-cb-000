@@ -1,0 +1,39 @@
+<!-- /tweets/tweets -->
+
+<h1>Welcome, <%= Helpers.current_user(session).username %> to Fwitter</h1>
+
+<h3>Tweets</h3>
+
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
+<table>
+  <tr>
+    <th>Tweet Id</th>
+    <th>By</th>
+    <th>Content</th>
+    <th>View</th>
+  </tr>
+
+  <% @tweets.each do |tweet| %>
+    <tr>
+      <td><%= tweet.id %></td>
+      <td><%= tweet.user.username %></td>
+      <td><%= tweet.content %></td>
+      <td><a href="/tweets/<%= tweet.id %>">View</a></td>
+    </tr>
+  <% end %>
+<table>
+
+<br></br>
+
+<!-- Link to Create New Tweet -->
+<form action="/tweets/new" method="GET">
+  <input type="submit" id="submit" value="New Tweet">
+</form>
+
+<!-- Link to Log Out -->
+<form action="/logout" method="GET">
+  <input type="submit" id="logout" value="Log Out">
+</form>
